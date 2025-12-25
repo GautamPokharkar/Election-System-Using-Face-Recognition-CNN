@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard-container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4 header-bar">
+    <h2 class="dashboard-title">Admin Dashboard</h2>
+    <div class="action-buttons">
+      <a href="{{ url_for('admin_add') }}" class="btn btn-purple">Add Voter</a>
+      <a href="{{ url_for('admin_train') }}" class="btn btn-outline-purple">Train Model</a>
+      <a href="{{ url_for('logout') }}" class="btn btn-gray">Logout</a>
+    </div>
+  </div>
+
+  <div class="card shadow-sm rounded-lg p-3">
+    <table class="table custom-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Aadhaar</th>
+          <th>Voter ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>City</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for v in voters %}
+        <tr>
+          <td>{{ v.id }}</td>
+          <td>{{ v.aadhaar }}</td>
+          <td>{{ v.voter_id }}</td>
+          <td>{{ v.first_name }} {{ v.middle_name or '' }} {{ v.last_name }}</td>
+          <td>{{ v.email }}</td>
+          <td>{{ v.age }}</td>
+          <td>{{ v.city }}</td>
+          <td>
+            <a class="btn btn-sm btn-warning btn-action" href="{{ url_for('admin_edit', voter_id=v.id) }}">Edit</a>
+            <form method="post" action="{{ url_for('admin_delete', voter_id=v.id) }}" style="display:inline" onsubmit="return confirm('Delete this voter?');">
+              <button class="btn btn-sm btn-danger btn-action" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+:root {
+  --primary-purple: #6a0dad;
+  --primary-purple-light: #8a2be2;
+  --primary-purple-dark: #4b0082;
+  --accent-purple: #9370db;
+  --light-purple: #f5f0ff;
+  --white: #ffffff;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --shadow: 0 4px 20px rgba(106, 13, 173, 0.1);
+  --shadow-hover: 0 8px 30px rgba(106, 13, 173, 0.15);
+}
+
+.dashboard-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-bar {
+  border-bottom: 2px solid var(--light-purple);
+  padding-bottom: 10px;
+}
+
+.dashboard-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-purple-dark);
+  position: relative;
+}
+
+.dashboard-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  border-radius: 2px;
+}
+
+.action-buttons a {
+  margin-left: 10px;
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light));
+  color: var(--white) !important;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.btn-purple:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  background: linear-gradient(135deg, var(--primary-purple-light), var(--primary-purple));
+}
+
+.btn-outline-purple {
+  background: transparent;
+  border: 2px solid var(--primary-purple);
+  color: var(--primary-purple) !important;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-purple:hover {
+  background: var(--primary-purple);
+  color: var(--white) !important;
+}
+
+.btn-gray {
+  background: var(--dark-gray);
+  color: var(--white) !important;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-gray:hover {
+  background: #5a6268;
+}
+
+.card {
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.custom-table thead th {
+  background: var(--light-purple);
+  color: var(--primary-purple-dark);
+  font-weight: 600;
+  border: none;
+  padding: 12px;
+}
+
+.custom-table tbody td {
+  padding: 12px;
+  border-top: 1px solid var(--medium-gray);
+}
+
+.custom-table tbody tr:hover {
+  background: #faf6ff;
+  transition: background 0.2s ease;
+}
+
+.btn-action {
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-weight: 500;
+}
+</style>
+{% endblock %}

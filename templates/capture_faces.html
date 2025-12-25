@@ -1,0 +1,28 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Faces - Election System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Face Registration with Liveness Check</h1>
+    <p>Please follow the instructions on the webcam window:</p>
+    <ul>
+        <li>Blink twice to confirm liveness.</li>
+        <li>Turn head slightly left and right when prompted.</li>
+        <li>Keep your face in the camera frame clearly.</li>
+    </ul>
+    <button onclick="startCapture()">Start Capture</button>
+
+    <script>
+        async function startCapture() {
+            const response = await fetch('/capture_faces', { method: 'POST' });
+            const data = await response.json();
+            alert(data.message);
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="results-container py-4">
+  <div class="results-header mb-4">
+    <h2 class="results-title">Election Results</h2>
+    <p class="results-subtitle">Live count of votes by party</p>
+  </div>
+
+  <div class="card shadow-sm rounded-lg p-3">
+    <table class="table custom-table">
+      <thead>
+        <tr>
+          <th>Party</th>
+          <th>Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in results %}
+        <tr>
+          <td>{{ r['party'] }}</td>
+          <td>{{ r['votes'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+:root {
+  --primary-purple: #6a0dad;
+  --primary-purple-light: #8a2be2;
+  --primary-purple-dark: #4b0082;
+  --accent-purple: #9370db;
+  --light-purple: #f5f0ff;
+  --white: #ffffff;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --shadow: 0 4px 20px rgba(106, 13, 173, 0.1);
+  --shadow-hover: 0 8px 30px rgba(106, 13, 173, 0.15);
+}
+
+.results-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.results-header {
+  text-align: center;
+}
+
+.results-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-purple-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.results-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  border-radius: 2px;
+}
+
+.results-subtitle {
+  font-size: 1rem;
+  color: var(--dark-gray);
+  margin-top: 10px;
+}
+
+.card {
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: center;
+}
+
+.custom-table thead th {
+  background: var(--light-purple);
+  color: var(--primary-purple-dark);
+  font-weight: 600;
+  border: none;
+  padding: 12px;
+}
+
+.custom-table tbody td {
+  padding: 12px;
+  border-top: 1px solid var(--medium-gray);
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.custom-table tbody tr:hover {
+  background: #faf6ff;
+  transition: background 0.2s ease;
+}
+</style>
+{% endblock %}

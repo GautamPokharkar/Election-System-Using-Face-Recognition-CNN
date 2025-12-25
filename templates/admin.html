@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Election System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+        <nav>
+            <button onclick="window.location.href='/home'">Home</button>
+            <button onclick="trainModel()">Train Model</button>
+            <button onclick="viewResults()">View Results</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="train-section">
+            <h2>Train Facial Recognition Model</h2>
+            <p>Click the button below to train the model with registered faces.</p>
+            <button onclick="trainModel()">Train Model</button>
+        </section>
+
+        <section id="results-section">
+            <h2>Election Results</h2>
+            <button onclick="viewResults()">View Results</button>
+            <div id="results"></div>
+        </section>
+    </main>
+
+    <script>
+        function trainModel() {
+            fetch('/admin/train', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(err => console.error(err));
+        }
+
+        function viewResults() {
+            fetch('/admin/results')
+            .then(response => response.json())
+            .then(data => {
+                let resultDiv = document.getElementById('results');
+                resultDiv.innerHTML = '';
+                data.results.forEach(r => {
+                    let p = document.createElement('p');
+                    p.textContent = `${r.party}: ${r.votes} votes`;
+                    resultDiv.appendChild(p);
+                });
+            })
+            .catch(err => console.error(err));
+        }
+    </script>
+</body>
+</html>
+

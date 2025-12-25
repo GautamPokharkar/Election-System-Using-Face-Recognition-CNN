@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+  <h3>Edit Voter</h3>
+  <form method="post" action="{{ url_for('admin_edit', voter_id=voter.id) }}">
+    <div class="row">
+      <div class="col-md-4 mb-2">
+        <label>First name</label>
+        <input class="form-control" name="first_name" value="{{ voter.first_name }}" required>
+      </div>
+      <div class="col-md-4 mb-2">
+        <label>Middle name</label>
+        <input class="form-control" name="middle_name" value="{{ voter.middle_name }}">
+      </div>
+      <div class="col-md-4 mb-2">
+        <label>Last name</label>
+        <input class="form-control" name="last_name" value="{{ voter.last_name }}" required>
+      </div>
+      <div class="col-md-4 mb-2">
+        <label>Phone</label>
+        <input class="form-control" name="phone" value="{{ voter.phone }}" required>
+      </div>
+      <div class="col-md-4 mb-2">
+        <label>Email</label>
+        <input class="form-control" name="email" value="{{ voter.email }}" required>
+      </div>
+      <div class="col-md-2 mb-2">
+        <label>Age</label>
+        <input class="form-control" name="age" value="{{ voter.age }}" required>
+      </div>
+      <div class="col-md-6 mb-2">
+        <label>State</label>
+        <input class="form-control" name="state" value="{{ voter.state }}" required>
+      </div>
+      <div class="col-md-6 mb-2">
+        <label>City</label>
+        <input class="form-control" name="city" value="{{ voter.city }}" required>
+      </div>
+    </div>
+    <button class="btn btn-primary mt-3" type="submit">Save Changes</button>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary mt-3">Cancel</a>
+  </form>
+</div>
+{% endblock %}

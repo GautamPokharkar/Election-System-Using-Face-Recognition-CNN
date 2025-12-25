@@ -1,0 +1,17 @@
+ {% extends "base.html" %}
+{% block content %}
+<h4>Cast your Vote</h4>
+<form method="post">
+  <div class="row">
+    {% for p in parties %}
+      <div class="col-md-3 text-center mb-3">
+        <button type="submit" name="party" value="{{ p.id }}" class="btn btn-light" style="border:1px solid #ccc;">
+          <img src="{{ p.img }}" alt="{{ p.id }}" style="max-width:100%; height:120px;"><br>
+          <strong>{{ p.id }}</strong>
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+</form>
+{% endblock %}
+

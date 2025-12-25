@@ -1,0 +1,377 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="login-container">
+  <div class="login-header">
+    <div class="header-content">
+      <h1 class="animated-title">Welcome Back</h1>
+      <p class="subtitle">Enter your Aadhaar number to access your account</p>
+    </div>
+    <div class="header-graphic">
+      <div class="graphic-shield">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+        </svg>
+      </div>
+      <div class="graphic-circle"></div>
+    </div>
+  </div>
+
+  <div class="login-card">
+    <form method="post" class="login-form">
+      <div class="form-group floating-label">
+        <input class="form-control" name="aadhaar" required title="12-digit Aadhaar" pattern="[0-9]{12}" maxlength="12">
+        <label>AADHAAR Number</label>
+        <div class="focus-border"></div>
+        <small class="form-text">Enter your 12-digit Aadhaar number</small>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-login" type="submit">
+          <span class="btn-text">Login to Your Account</span>
+          <span class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </form>
+    
+    <div class="login-footer">
+      <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+    </div>
+  </div>
+</div>
+
+<style>
+/* CSS Variables for consistent theming */
+:root {
+  --primary-purple: #6a0dad;
+  --primary-purple-light: #8a2be2;
+  --primary-purple-dark: #4b0082;
+  --accent-purple: #9370db;
+  --light-purple: #f5f0ff;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --text-dark: #343a40;
+  --shadow: 0 4px 20px rgba(106, 13, 173, 0.1);
+  --shadow-hover: 0 8px 30px rgba(106, 13, 173, 0.15);
+}
+
+/* Base styles */
+.login-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header styles */
+.login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding: 30px 0;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.animated-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-purple-dark);
+  margin-bottom: 10px;
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animated-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  border-radius: 2px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--dark-gray);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.header-graphic {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+.graphic-shield {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 20px rgba(106, 13, 173, 0.3);
+  position: absolute;
+  z-index: 2;
+}
+
+.graphic-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-purple);
+  position: absolute;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Card styles */
+.login-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-out 0.4s both;
+  padding: 40px;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Form styles */
+.login-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.floating-label label {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  font-size: 1rem;
+  color: var(--dark-gray);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background: var(--white);
+  padding: 0 5px;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 0.8rem;
+  color: var(--primary-purple);
+  font-weight: 500;
+}
+
+.form-control {
+  padding: 16px 12px 8px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+  outline: none;
+}
+
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  transition: width 0.3s ease;
+}
+
+.form-control:focus ~ .focus-border {
+  width: 100%;
+}
+
+.form-text {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--dark-gray);
+}
+
+/* Button styles */
+.form-actions {
+  margin-top: 30px;
+}
+
+.btn-login {
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light));
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.btn-login:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(106, 13, 173, 0.4);
+  background: linear-gradient(135deg, var(--primary-purple-light), var(--primary-purple));
+}
+
+.btn-login:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.btn-login:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+/* Footer styles */
+.login-footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--medium-gray);
+  color: var(--dark-gray);
+}
+
+.login-footer a {
+  color: var(--primary-purple);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-footer a:hover {
+  color: var(--primary-purple-dark);
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header-graphic {
+    margin-top: 30px;
+  }
+  
+  .animated-title {
+    font-size: 2rem;
+  }
+  
+  .animated-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .login-card {
+    padding: 30px 20px;
+  }
+}
+</style>
+
+<script>
+// Add interactive animations
+document.addEventListener('DOMContentLoaded', function() {
+  // Add animation to form input on focus
+  const aadhaarInput = document.querySelector('input[name="aadhaar"]');
+  
+  aadhaarInput.addEventListener('focus', function() {
+    this.parentElement.classList.add('focused');
+  });
+  
+  aadhaarInput.addEventListener('blur', function() {
+    if (!this.value) {
+      this.parentElement.classList.remove('focused');
+    }
+  });
+  
+  // Form submission animation
+  const form = document.querySelector('.login-form');
+  form.addEventListener('submit', function(e) {
+    const button = this.querySelector('.btn-login');
+    button.disabled = true;
+    button.innerHTML = '<span class="btn-text">Authenticating...</span>';
+  });
+  
+  // Input validation for Aadhaar (only numbers, max 12 digits)
+  aadhaarInput.addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+    if (this.value.length > 12) {
+      this.value = this.value.slice(0, 12);
+    }
+  });
+});
+</script>
+{% endblock %}

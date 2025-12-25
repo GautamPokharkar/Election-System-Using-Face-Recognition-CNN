@@ -1,0 +1,486 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="update-details-container">
+  <div class="update-header">
+    <div class="header-content">
+      <h1 class="animated-title">Update Your Details</h1>
+      <p class="subtitle">Keep your information current for a seamless voting experience</p>
+    </div>
+    <div class="header-graphic">
+      <div class="graphic-pencil">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+        </svg>
+      </div>
+      <div class="graphic-circle"></div>
+    </div>
+  </div>
+
+  <div class="update-card">
+    <form method="post" class="update-form">
+      <div class="form-section">
+        <h3 class="section-title">
+          <span class="section-icon">🔍</span>
+          Identification
+        </h3>
+        <div class="form-group floating-label">
+          <input class="form-control" name="aadhaar" required>
+          <label>Aadhaar Number (to update)</label>
+          <div class="focus-border"></div>
+          <small class="form-text">Enter your 12-digit Aadhaar number to update details</small>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title">
+          <span class="section-icon">👤</span>
+          Personal Information
+        </h3>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="first_name" placeholder=" ">
+              <label>First Name</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="middle_name" placeholder=" ">
+              <label>Middle Name (Optional)</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="last_name" placeholder=" ">
+              <label>Last Name</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title">
+          <span class="section-icon">📞</span>
+          Contact Details
+        </h3>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="phone" placeholder=" ">
+              <label>Phone Number</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="email" placeholder=" ">
+              <label>Email Address</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" type="number" name="age" placeholder=" ">
+              <label>Age</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title">
+          <span class="section-icon">📍</span>
+          Location Information
+        </h3>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="state" placeholder=" ">
+              <label>State</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="city" placeholder=" ">
+              <label>City</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-update" type="submit">
+          <span class="btn-text">Update Details</span>
+          <span class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+/* CSS Variables for consistent theming */
+:root {
+  --primary-purple: #6a0dad;
+  --primary-purple-light: #8a2be2;
+  --primary-purple-dark: #4b0082;
+  --accent-purple: #9370db;
+  --light-purple: #f5f0ff;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --text-dark: #343a40;
+  --shadow: 0 4px 20px rgba(106, 13, 173, 0.1);
+  --shadow-hover: 0 8px 30px rgba(106, 13, 173, 0.15);
+}
+
+/* Base styles */
+.update-details-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header styles */
+.update-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding: 30px 0;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.animated-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-purple-dark);
+  margin-bottom: 10px;
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animated-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  border-radius: 2px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--dark-gray);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.header-graphic {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+.graphic-pencil {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 20px rgba(106, 13, 173, 0.3);
+  position: absolute;
+  z-index: 2;
+}
+
+.graphic-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-purple);
+  position: absolute;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Card styles */
+.update-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+.update-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Form sections */
+.form-section {
+  padding: 30px;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  color: var(--primary-purple);
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.section-icon {
+  margin-right: 12px;
+  font-size: 1.6rem;
+}
+
+/* Form group styles */
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.floating-label label {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  font-size: 1rem;
+  color: var(--dark-gray);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background: var(--white);
+  padding: 0 5px;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 0.8rem;
+  color: var(--primary-purple);
+  font-weight: 500;
+}
+
+.form-control {
+  padding: 16px 12px 8px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+  outline: none;
+}
+
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  transition: width 0.3s ease;
+}
+
+.form-control:focus ~ .focus-border {
+  width: 100%;
+}
+
+.form-text {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--dark-gray);
+}
+
+/* Button styles */
+.form-actions {
+  padding: 30px;
+  text-align: center;
+  background: var(--light-purple);
+}
+
+.btn-update {
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light));
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-update:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(106, 13, 173, 0.4);
+  background: linear-gradient(135deg, var(--primary-purple-light), var(--primary-purple));
+}
+
+.btn-update:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.btn-update:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .update-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header-graphic {
+    margin-top: 30px;
+  }
+  
+  .animated-title {
+    font-size: 2rem;
+  }
+  
+  .animated-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .form-section {
+    padding: 20px;
+  }
+}
+</style>
+
+<script>
+// Add interactive animations
+document.addEventListener('DOMContentLoaded', function() {
+  // Add animation to form inputs on focus
+  const formInputs = document.querySelectorAll('.form-control');
+  
+  formInputs.forEach(input => {
+    input.addEventListener('focus', function() {
+      this.parentElement.classList.add('focused');
+    });
+    
+    input.addEventListener('blur', function() {
+      if (!this.value) {
+        this.parentElement.classList.remove('focused');
+      }
+    });
+  });
+  
+  // Form submission animation
+  const form = document.querySelector('.update-form');
+  form.addEventListener('submit', function(e) {
+    const button = this.querySelector('.btn-update');
+    button.disabled = true;
+    button.innerHTML = '<span class="btn-text">Updating...</span>';
+  });
+  
+  // Input validation for Aadhaar (only numbers, max 12 digits)
+  const aadhaarInput = document.querySelector('input[name="aadhaar"]');
+  if (aadhaarInput) {
+    aadhaarInput.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '');
+      if (this.value.length > 12) {
+        this.value = this.value.slice(0, 12);
+      }
+    });
+  }
+  
+  // Input validation for phone (only numbers, max 10 digits)
+  const phoneInput = document.querySelector('input[name="phone"]');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '');
+      if (this.value.length > 10) {
+        this.value = this.value.slice(0, 10);
+      }
+    });
+  }
+  
+  // Input validation for age (only numbers)
+  const ageInput = document.querySelector('input[name="age"]');
+  if (ageInput) {
+    ageInput.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+  }
+});
+</script>
+{% endblock %}

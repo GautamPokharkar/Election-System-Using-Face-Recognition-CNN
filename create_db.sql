@@ -1,0 +1,35 @@
+CREATE DATABASE IF NOT EXISTS election_db1;
+USE election_db1;
+
+CREATE TABLE IF NOT EXISTS voters (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    aadhaar VARCHAR(12) UNIQUE NOT NULL,
+    voter_id VARCHAR(8) UNIQUE NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    middle_name VARCHAR(100),
+    last_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(10) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    age INT NOT NULL,
+    state VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    email_verified BOOLEAN DEFAULT FALSE,
+    face_registered BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS votes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    aadhaar VARCHAR(12) NOT NULL,
+    party VARCHAR(50) NOT NULL,
+    vote_date DATE NOT NULL,
+    vote_time TIME NOT NULL,
+    FOREIGN KEY (aadhaar) REFERENCES voters(aadhaar)
+);
+
+CREATE TABLE IF NOT EXISTS admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100),
+    password_hash VARCHAR(255)
+);

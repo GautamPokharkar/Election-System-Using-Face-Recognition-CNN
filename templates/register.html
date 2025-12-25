@@ -1,0 +1,449 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="voter-registration-container">
+  <div class="registration-header">
+    <div class="header-content">
+      <h1 class="animated-title">Voter Registration</h1>
+      <p class="subtitle">Register to exercise your democratic right</p>
+    </div>
+    <div class="header-graphic">
+      <div class="graphic-circle"></div>
+      <div class="graphic-wave"></div>
+    </div>
+  </div>
+
+  <div class="registration-card">
+    <form method="post" class="registration-form">
+      <div class="form-section">
+        <h3 class="section-title">
+          <span class="section-icon">👤</span>
+          Personal Information
+        </h3>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="first_name" title="Enter first name" required>
+              <label>First name</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="middle_name" title="Optional">
+              <label>Middle name (optional)</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="last_name" required>
+              <label>Last name</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title">
+          <span class="section-icon">🆔</span>
+          Identification Details
+        </h3>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="aadhaar" required title="12 digits (numbers only)">
+              <label>AADHAAR (12 digits)</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="voter_id" required title="3 uppercase letters followed by 5 digits (no spaces)">
+              <label>Voter ID (3 uppercase + 5 digits)</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="phone" required title="10 digits">
+              <label>Phone</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title">
+          <span class="section-icon">📍</span>
+          Contact & Location
+        </h3>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="email" required title="Enter the same email logged in on system">
+              <label>Email (must match system email)</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-2 mb-3">
+            <div class="form-group floating-label">
+              <input class="form-control" name="age" required type="number" min="1">
+              <label>Age</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="form-group select-group">
+              <select class="form-select" name="state">
+                <option>Mumbai</option>
+              </select>
+              <label>District</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="form-group select-group">
+              <select class="form-select" name="city">
+                <option>Ghatopar</option>
+                <option>Vikhroli</option>
+                <option>Mulund</option>
+              </select>
+              <label>City</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-register" type="submit">
+          <span class="btn-text">Register & Verify Email</span>
+          <span class="btn-icon">→</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+/* CSS Variables for consistent theming */
+:root {
+  --primary-purple: #6a0dad;
+  --primary-purple-light: #8a2be2;
+  --primary-purple-dark: #4b0082;
+  --accent-purple: #9370db;
+  --light-purple: #f5f0ff;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --text-dark: #343a40;
+  --shadow: 0 4px 20px rgba(106, 13, 173, 0.1);
+  --shadow-hover: 0 8px 30px rgba(106, 13, 173, 0.15);
+}
+
+/* Base styles */
+.voter-registration-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header styles */
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding: 30px 0;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.animated-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-purple-dark);
+  margin-bottom: 10px;
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animated-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  border-radius: 2px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--dark-gray);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.header-graphic {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+.graphic-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+  position: absolute;
+  z-index: 2;
+  box-shadow: 0 8px 20px rgba(106, 13, 173, 0.3);
+}
+
+.graphic-wave {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-purple);
+  position: absolute;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Card styles */
+.registration-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+.registration-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Form sections */
+.form-section {
+  padding: 30px;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  color: var(--primary-purple);
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.section-icon {
+  margin-right: 12px;
+  font-size: 1.6rem;
+}
+
+/* Form group styles */
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.floating-label label,
+.select-group label {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  font-size: 1rem;
+  color: var(--dark-gray);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background: var(--white);
+  padding: 0 5px;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label,
+.select-group select:focus + label,
+.select-group select:not([value=""]) + label {
+  top: -10px;
+  font-size: 0.8rem;
+  color: var(--primary-purple);
+  font-weight: 500;
+}
+
+.form-control,
+.form-select {
+  padding: 16px 12px 8px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+  outline: none;
+}
+
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  transition: width 0.3s ease;
+}
+
+.form-control:focus ~ .focus-border,
+.form-select:focus ~ .focus-border {
+  width: 100%;
+}
+
+/* Button styles */
+.form-actions {
+  padding: 30px;
+  text-align: center;
+  background: var(--light-purple);
+}
+
+.btn-register {
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light));
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-register:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(106, 13, 173, 0.4);
+  background: linear-gradient(135deg, var(--primary-purple-light), var(--primary-purple));
+}
+
+.btn-register:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.btn-register:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .registration-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header-graphic {
+    margin-top: 30px;
+  }
+  
+  .animated-title {
+    font-size: 2rem;
+  }
+  
+  .animated-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .form-section {
+    padding: 20px;
+  }
+}
+</style>
+
+<script>
+// Add some interactive animations
+document.addEventListener('DOMContentLoaded', function() {
+  // Add animation to form elements on focus
+  const formInputs = document.querySelectorAll('.form-control, .form-select');
+  
+  formInputs.forEach(input => {
+    input.addEventListener('focus', function() {
+      this.parentElement.classList.add('focused');
+    });
+    
+    input.addEventListener('blur', function() {
+      if (!this.value) {
+        this.parentElement.classList.remove('focused');
+      }
+    });
+  });
+  
+  // Form submission animation
+  const form = document.querySelector('.registration-form');
+  form.addEventListener('submit', function(e) {
+    const button = this.querySelector('.btn-register');
+    button.disabled = true;
+    button.innerHTML = '<span class="btn-text">Processing...</span>';
+  });
+});
+</script>
+{% endblock %}

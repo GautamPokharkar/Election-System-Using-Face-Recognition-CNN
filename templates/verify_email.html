@@ -1,0 +1,510 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="otp-verification-container">
+  <div class="verification-header">
+    <div class="header-content">
+      <h1 class="animated-title">Verify Your Identity</h1>
+      <p class="subtitle">Enter the OTP sent to your email address</p>
+      <div class="otp-info">
+        <div class="info-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+          </svg>
+        </div>
+        <span>Check your email inbox for the verification code</span>
+      </div>
+    </div>
+    <div class="header-graphic">
+      <div class="graphic-shield">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+        </svg>
+      </div>
+      <div class="graphic-circle"></div>
+    </div>
+  </div>
+
+  <div class="verification-card">
+    <form method="post" class="verification-form">
+      <div class="form-group floating-label">
+        <input class="form-control otp-input" name="otp" required maxlength="6" pattern="[0-9]{6}" title="Enter 6-digit OTP">
+        <label>Enter OTP Code</label>
+        <div class="focus-border"></div>
+        <small class="form-text">6-digit code sent to your registered email</small>
+      </div>
+
+      <div class="timer-section">
+        <div class="timer" id="otpTimer">
+          <span class="timer-icon">⏱️</span>
+          <span class="timer-text">Code expires in: <span id="countdown">05:00</span></span>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-verify" type="submit">
+          <span class="btn-text">Verify & Continue</span>
+          <span class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+              <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </form>
+    
+    <div class="verification-footer">
+      <p>Didn't receive the code? <a href="#" id="resendOtp">Resend OTP</a></p>
+    </div>
+  </div>
+</div>
+
+<style>
+/* CSS Variables for consistent theming */
+:root {
+  --primary-purple: #6a0dad;
+  --primary-purple-light: #8a2be2;
+  --primary-purple-dark: #4b0082;
+  --accent-purple: #9370db;
+  --light-purple: #f5f0ff;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --text-dark: #343a40;
+  --shadow: 0 4px 20px rgba(106, 13, 173, 0.1);
+  --shadow-hover: 0 8px 30px rgba(106, 13, 173, 0.15);
+  --success-green: #28a745;
+  --warning-orange: #ffc107;
+}
+
+/* Base styles */
+.otp-verification-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header styles */
+.verification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding: 30px 0;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.animated-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-purple-dark);
+  margin-bottom: 10px;
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animated-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  border-radius: 2px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--dark-gray);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  margin-bottom: 15px;
+}
+
+.otp-info {
+  display: flex;
+  align-items: center;
+  background: var(--light-purple);
+  padding: 12px 15px;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-purple);
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.info-icon {
+  margin-right: 10px;
+  color: var(--primary-purple);
+}
+
+.otp-info span {
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+}
+
+.header-graphic {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+.graphic-shield {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 20px rgba(106, 13, 173, 0.3);
+  position: absolute;
+  z-index: 2;
+}
+
+.graphic-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-purple);
+  position: absolute;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Card styles */
+.verification-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-out 0.6s both;
+}
+
+.verification-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Form styles */
+.verification-form {
+  padding: 40px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.floating-label label {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  font-size: 1rem;
+  color: var(--dark-gray);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background: var(--white);
+  padding: 0 5px;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 0.8rem;
+  color: var(--primary-purple);
+  font-weight: 500;
+}
+
+.form-control {
+  padding: 16px 12px 8px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  letter-spacing: 8px;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+  outline: none;
+}
+
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary-purple), var(--accent-purple));
+  transition: width 0.3s ease;
+}
+
+.form-control:focus ~ .focus-border {
+  width: 100%;
+}
+
+.form-text {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--dark-gray);
+  text-align: center;
+}
+
+/* Timer section */
+.timer-section {
+  margin: 25px 0;
+  text-align: center;
+}
+
+.timer {
+  display: inline-flex;
+  align-items: center;
+  background: var(--light-purple);
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: var(--primary-purple);
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+.timer-icon {
+  margin-right: 8px;
+}
+
+.timer.expiring {
+  background: #fff3cd;
+  color: var(--warning-orange);
+  animation: pulse 1s infinite;
+}
+
+/* Button styles */
+.form-actions {
+  margin-top: 30px;
+}
+
+.btn-verify {
+  background: linear-gradient(135deg, var(--success-green), #20c997);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.btn-verify:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+  background: linear-gradient(135deg, #20c997, var(--success-green));
+}
+
+.btn-verify:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.btn-verify:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+/* Footer styles */
+.verification-footer {
+  text-align: center;
+  padding: 20px 40px;
+  border-top: 1px solid var(--medium-gray);
+  color: var(--dark-gray);
+}
+
+.verification-footer a {
+  color: var(--primary-purple);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.verification-footer a:hover {
+  color: var(--primary-purple-dark);
+  text-decoration: underline;
+}
+
+.verification-footer a.disabled {
+  color: var(--dark-gray);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .verification-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header-graphic {
+    margin-top: 30px;
+  }
+  
+  .animated-title {
+    font-size: 2rem;
+  }
+  
+  .animated-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .verification-form {
+    padding: 30px 20px;
+  }
+}
+</style>
+
+<script>
+// Add interactive animations and functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Add animation to OTP input on focus
+  const otpInput = document.querySelector('.otp-input');
+  
+  otpInput.addEventListener('focus', function() {
+    this.parentElement.classList.add('focused');
+  });
+  
+  otpInput.addEventListener('blur', function() {
+    if (!this.value) {
+      this.parentElement.classList.remove('focused');
+    }
+  });
+  
+  // OTP input validation (only numbers, max 6 digits)
+  otpInput.addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+    if (this.value.length > 6) {
+      this.value = this.value.slice(0, 6);
+    }
+  });
+  
+  // Form submission animation
+  const form = document.querySelector('.verification-form');
+  form.addEventListener('submit', function(e) {
+    const button = this.querySelector('.btn-verify');
+    button.disabled = true;
+    button.innerHTML = '<span class="btn-text">Verifying...</span>';
+  });
+  
+  // Timer functionality
+  let timeLeft = 300; // 5 minutes in seconds
+  const timerElement = document.getElementById('countdown');
+  const timerContainer = document.getElementById('otpTimer');
+  const resendLink = document.getElementById('resendOtp');
+  
+  function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    
+    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (timeLeft <= 60) {
+      timerContainer.classList.add('expiring');
+    }
+    
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timerElement.textContent = '00:00';
+      resendLink.classList.remove('disabled');
+      timerContainer.style.display = 'none';
+    } else {
+      timeLeft--;
+    }
+  }
+  
+  const timerInterval = setInterval(updateTimer, 1000);
+  
+  // Resend OTP functionality
+  resendLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    if (this.classList.contains('disabled')) {
+      return;
+    }
+    
+    // Show loading state
+    const originalText = this.textContent;
+    this.textContent = 'Sending...';
+    this.classList.add('disabled');
+    
+    // Simulate API call to resend OTP
+    setTimeout(() => {
+      // Reset timer
+      timeLeft = 300;
+      timerContainer.style.display = 'inline-flex';
+      timerContainer.classList.remove('expiring');
+      updateTimer();
+      
+      // Reset button
+      this.textContent = 'Resend OTP';
+      this.classList.add('disabled');
+      
+      // Show success message
+      alert('A new OTP has been sent to your email address.');
+    }, 2000);
+  });
+});
+</script>
+{% endblock %}
